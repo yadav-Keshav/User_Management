@@ -1,0 +1,33 @@
+{
+  "name": "usermanagement",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/api/v1/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yadav-Keshav/User_Management.git"
+  },
+  "author": "Keshav Yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yadav-Keshav/User_Management/issues"
+  },
+  "homepage": "https://github.com/yadav-Keshav/User_Management#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.4",
+    "nodemailer": "^6.7.2",
+    "validator": "^13.7.0"
+  }
+}
