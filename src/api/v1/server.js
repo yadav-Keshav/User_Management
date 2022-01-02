@@ -1,6 +1,6 @@
 const connectDB = require('./config/connectDB');
 const app = require('./app');
-const { PORT } = require('./config/env');
+
 
 
 // Handling uncaught Error
@@ -13,8 +13,10 @@ process.on('uncaughtException',(err)=>{
 //Connecting to Database
 connectDB();
 
+
+const PORT=process.env.PORT || 4000;
 const server=app.listen(PORT, () => {
-    console.log(`Server is Listening on PORT : ${process.env.PORT}`);
+    console.log(`Server is Listening on PORT : ${PORT}`);
 });
 
 

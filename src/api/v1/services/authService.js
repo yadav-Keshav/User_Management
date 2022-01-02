@@ -22,7 +22,7 @@ exports.Signup = async (data, protocol, host) => {
         let html = confirmEmailTemplate(data.username, link);
         var user = await userModel.create(data);
         await Profile.create({ user: user._id });
-        await axios.post('http://localhost:4001', { email: data.email, html: html, subject: 'Link for confirm Email' });
+        await axios.post('https://email-sevice.herokuapp.com/', { email: data.email, html: html, subject: 'Link for confirm Email' });
         return { sucess: true, message: 'Sucessfully Registered' };
     }
 }
@@ -70,7 +70,7 @@ exports.GetVerificationLink = async (email, protocol, host) => {
     if (user) {
         let link = `${protocol}://${host}/users/confirm_email/${token}`;
         let html = confirmEmailTemplate(user.username, link);
-        await axios.post('http://localhost:4001', { email: user.email, html: html, subject: 'Link for confirm Email' });
+        await axios.post('https://email-sevice.herokuapp.com/', { email: user.email, html: html, subject: 'Link for confirm Email' });
         return { sucess: true, message: 'Link Sent' };
     }
     else {
@@ -85,7 +85,7 @@ exports.ForgotPassword = async (email) => {
         var html = forgotPasswordTemplate(" ", OTP);
         user.token = OTP;
         await user.save();
-        await axios.post('http://localhost:4001', { email: email, html: html, subject: 'OTP for Reset Password' });
+        await axios.post('https://email-sevice.herokuapp.com/', { email: email, html: html, subject: 'OTP for Reset Password' });
         const jwtToken = jwt.sign({ _id: user._id }, KEY);
         return { sucess: true, message: 'OTP send', resetToken: jwtToken };
     }
