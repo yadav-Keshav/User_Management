@@ -1,5 +1,4 @@
 
-const req = require('express/lib/request');
 const { Signup, verifyEmail, Login, ForgotPassword, ResetPassword, DeleteUser, Update, GetUser, GetVerificationLink, SearchUser } =
     require('../services/authService');
 
@@ -62,7 +61,7 @@ exports.deleteUser = async (req, res) => {
 
 exports.getVerificationLink = async (req, res) => {
     try {
-        const data = await GetVerificationLink(req.body.email);
+        const data = await GetVerificationLink(req.body.email,req.protocol,req.get('host'));
         return res.send(data);
     }
     catch (err) {
