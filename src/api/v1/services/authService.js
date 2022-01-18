@@ -20,8 +20,8 @@ exports.Signup = async (data, protocol, host) => {
         data.password = await hashPassword(data.password);
         let link = `${protocol}://${host}/users/confirm_email/${data.token}`;
         let html = confirmEmailTemplate(data.username, link);
-        var user = await userModel.create(data);
-        await Profile.create({ user: user._id });
+        var user = await userModel.create({ username: data.username, email: data.email, password: data.password });
+        await Profile.create({ user: user._id, name: data.name });
         await axios.post('https://email-sevice.herokuapp.com/', { email: data.email, html: html, subject: 'Link for confirm Email' });
         return { sucess: true, message: 'Sucessfully Registered' };
     }
@@ -66,7 +66,7 @@ exports.Login = async (email, password) => {
 
 exports.GetVerificationLink = async (email, protocol, host) => {
     const token = createToken();
-    const user = await userModel.findOneAndUpdate({ email: email }, { token });
+    const user = await userModel.findOneAndUpdate({ email: email }, { token: token });
     if (user) {
         let link = `${protocol}://${host}/users/confirm_email/${token}`;
         let html = confirmEmailTemplate(user.username, link);
