@@ -16,7 +16,7 @@ exports.Signup = async (data, protocol, host) => {
         return { sucess: false, message: (user.email == data.email) ? 'Email already Exist' : 'Username already Exist' };
     }
     else {
-        data.token = createToken();
+        data.token = Date.now()+createToken();
         data.password = await hashPassword(data.password);
         let link = `${protocol}://${host}/users/confirm_email/${data.token}`;
         let html = confirmEmailTemplate(data.username, link);
