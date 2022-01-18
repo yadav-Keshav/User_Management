@@ -20,8 +20,7 @@ exports.Signup = async (data, protocol, host) => {
         data.password = await hashPassword(data.password);
         let link = `${protocol}://${host}/users/confirm_email/${data.token}`;
         let html = confirmEmailTemplate(data.username, link);
-        var user = await userModel.create({ username: data.username, email: data.email, password: data.password });
-        await Profile.create({ user: user._id, name: data.name });
+        var user = await userModel.create(data);
         await axios.post('https://email-sevice.herokuapp.com/', { email: data.email, html: html, subject: 'Link for confirm Email' });
         return { sucess: true, message: 'Sucessfully Registered' };
     }

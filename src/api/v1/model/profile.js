@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 const profileSchema = new mongoose.Schema(
     {
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-        },
+        
         name: {
             type: String,
-            required:[true,"Name cannot be empty"]
+            required: [true, "Name cannot be empty"]
         },
         bio: {
             type: String,
@@ -19,9 +16,6 @@ const profileSchema = new mongoose.Schema(
             default: 'public',
         },
         website: {
-            type: String,
-        },
-        name: {
             type: String,
         },
         gender: {
